@@ -192,11 +192,11 @@
 
         .message-container {
             position: fixed;
-            top: 20%;
+            top: 10%;
             left: 50%;
             transform: translateX(-50%);
             z-index: 50;
-            width: 90%;
+            width: 95%;
             max-width: 600px;
             max-height: 90vh;
             opacity: 0;
@@ -204,49 +204,44 @@
             transition: all 0.5s ease-out;
         }
 
-        .message-container.show {
-            opacity: 1;
-            pointer-events: auto;
-            animation: messageReveal 0.8s ease-out forwards;
+        @media (max-width: 640px) {
+            .message-content {
+                padding: 1rem !important;
+            }
+            
+            .message-content h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .message-content p.text-2xl {
+                font-size: 1.25rem !important;
+                line-height: 1.5 !important;
+            }
+
+            .message-content .message-reveal p {
+                font-size: 1rem !important;
+                padding: 0.5rem 1rem !important;
+            }
+
+            .gift-box-container {
+                transform: scale(0.8);
+            }
+
+            .snowfall {
+                display: none;
+            }
         }
 
-        .message-content {
-            max-height: 80vh;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-        }
-
-        .message-content::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .message-content::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .message-content::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-        }
-
-        .message-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease-out;
-            z-index: 40;
-        }
-
-        .message-backdrop.show {
-            opacity: 1;
-            pointer-events: auto;
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .message-reveal p:hover {
+                transform: none;
+            }
+            
+            .message-reveal p:active {
+                transform: scale(1.02);
+            }
         }
     </style>
 </head>
@@ -260,14 +255,14 @@
         
         <!-- Message Container -->
         <div id="newYearMessage" class="message-container">
-            <div class="message-content bg-gradient-to-r from-transparent via-white/10 to-transparent backdrop-blur-md rounded-2xl p-8 shadow-2xl">
-                <h1 class="py-2 text-6xl font-bold font-dancing text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 mb-6">
-                    Happy New Year <br><span class="text-pink-500"">🎉 2025 🎉</span>
+            <div class="message-content bg-gradient-to-r from-transparent via-white/10 to-transparent backdrop-blur-md rounded-2xl p-4 sm:p-8 shadow-2xl">
+                <h1 class="py-2 text-4xl sm:text-6xl font-bold font-dancing text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 mb-4 sm:mb-6">
+                    Happy New Year <br><span class="text-pink-500">🎉 2025 🎉</span>
                 </h1>
-                <p class="text-2xl text-white/90 mb-8 font-light">
+                <p class="text-xl sm:text-2xl text-white/90 mb-6 sm:mb-8 font-light">
                     May your year be filled with health, joy, love and endless possibilities! ✨
                 </p>
-                <div class="space-y-4 text-lg text-white/90 message-reveal">
+                <div class="space-y-3 sm:space-y-4 text-base sm:text-lg text-white/90 message-reveal">
                     <p class="transform transition-transform hover:scale-105">🌟 Dream big and aim high</p>
                     <p class="transform transition-transform hover:scale-105">💖 Love deeply and laugh often</p>
                     <p class="transform transition-transform hover:scale-105">🌈 Embrace new adventures</p>
@@ -278,9 +273,9 @@
         
         <div class="gradient-border inline-block mb-8">
             <!-- Gift Box Container -->
-            <div id="giftBox" class="gift-float cursor-pointer transform transition-transform duration-500 hover:scale-105 bg-gradient-to-br from-purple-900 via-blue-900 to-black p-4 rounded-lg gift-shadow" onclick="openGift()">
+            <div id="giftBox" class="gift-float cursor-pointer transform transition-transform duration-500 hover:scale-105 bg-gradient-to-br from-purple-900 via-blue-900 to-black p-4 rounded-lg gift-shadow gift-box-container sm:p-6" onclick="openGift()">
                 <!-- Gift Box -->
-                <div class="w-64 h-64 relative mx-auto">
+                <div class="w-48 h-48 sm:w-64 sm:h-64 relative mx-auto">
                     <!-- Box Lid -->
                     <div id="lid" class="absolute w-full h-1/3 bg-gradient-to-r from-pink-500 to-pink-400 rounded-t-lg transform-origin-top transition-transform duration-1000 gift-pattern">
                         <!-- Bow -->
