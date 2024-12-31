@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2025! 🎉</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .gift-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #ff1493, 0 0 10px #ff1493, 0 0 15px #ff69b4; }
+            50% { box-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff69b4; }
+            100% { box-shadow: 0 0 5px #ff1493, 0 0 10px #ff1493, 0 0 15px #ff69b4; }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .message-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+        }
+        .star:nth-child(3n) {
+            animation: twinkle 1.5s infinite;
+        }
+        .star:nth-child(3n+1) {
+            animation: twinkle 2s infinite;
+        }
+        .star:nth-child(3n+2) {
+            animation: twinkle 2.5s infinite;
+        }
+        .message-reveal p {
+            animation: slideIn 0.5s ease-out forwards;
+            opacity: 0;
+            padding: 0.75rem 1.5rem;
+            border-radius: 1rem;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(5px);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .message-reveal p:hover {
+            transform: scale(1.02);
+        }
+
+        .message-reveal p:nth-child(1) { animation-delay: 0.2s; }
+        .message-reveal p:nth-child(2) { animation-delay: 0.4s; }
+        .message-reveal p:nth-child(3) { animation-delay: 0.6s; }
+        .message-reveal p:nth-child(4) { animation-delay: 0.8s; }
+        
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffd700);
+            padding: 4px;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 1rem;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffd700);
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        /* Gift box patterns */
+        .gift-pattern {
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
+            );
+        }
+        
+        .ribbon-pattern {
+            background-image: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.2) 2px,
+                rgba(255, 255, 255, 0.2) 4px
+            );
+        }
+
+        .gift-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes unwrap {
+            0% { transform: rotateX(0deg); }
+            50% { transform: rotateX(-120deg) translateY(-20px); opacity: 1; }
+            100% { transform: rotateX(-180deg) translateY(-40px); opacity: 0; }
+        }
+
+        @keyframes boxOpen {
+            0% { transform: scaleY(1); }
+            50% { transform: scaleY(1.1); }
+            100% { transform: scaleY(1); }
+        }
+
+        .unwrap-animation {
+            animation: unwrap 1.5s ease-in-out forwards;
+        }
+
+        .box-open-animation {
+            animation: boxOpen 1.5s ease-in-out;
+        }
+
+        .bow {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            z-index: 2;
+        }
+
+        .bow-left, .bow-right {
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: #ff1493;
+            border-radius: 50%;
+        }
+
+        .bow-left {
+            transform: rotate(-30deg);
+            left: -5px;
+        }
+
+        .bow-right {
+            transform: rotate(30deg);
+            right: -5px;
+        }
+
+        .bow-center {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ff0066;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        @keyframes messageReveal {
+            0% { 
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px) scale(0.8);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+        }
+
+        .message-container {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease-out;
+        }
+
+        .message-container.show {
+            opacity: 1;
+            pointer-events: auto;
+            animation: messageReveal 0.8s ease-out forwards;
+        }
+
+        .message-content {
+            max-height: 80vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        }
+
+        .message-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .message-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .message-content::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+        }
+
+        .message-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-out;
+            z-index: 40;
+        }
+
+        .message-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-900 via-blue-900 to-black min-h-screen flex items-center justify-center p-4">
+    <div class="snowfall" id="snowfall"></div>
+    <div id="starfield"></div>
+    
+    <div class="text-center relative z-10">
+        <!-- Message Backdrop -->
+        <div id="messageBackdrop" class="message-backdrop"></div>
+        
+        <!-- Message Container -->
+        <div id="newYearMessage" class="message-container">
+            <div class="message-content bg-gradient-to-r from-transparent via-white/10 to-transparent backdrop-blur-md rounded-2xl p-8 shadow-2xl">
+                <h1 class="py-2 text-6xl font-bold font-dancing text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 mb-6">
+                    Happy New Year <br><span class="text-pink-500"">🎉 2025 🎉</span>
+                </h1>
+                <p class="text-2xl text-white/90 mb-8 font-light">
+                    May your year be filled with health, joy, love and endless possibilities! ✨
+                </p>
+                <div class="space-y-4 text-lg text-white/90 message-reveal">
+                    <p class="transform transition-transform hover:scale-105">🌟 Dream big and aim high</p>
+                    <p class="transform transition-transform hover:scale-105">💖 Love deeply and laugh often</p>
+                    <p class="transform transition-transform hover:scale-105">🌈 Embrace new adventures</p>
+                    <p class="transform transition-transform hover:scale-105">✨ Make every moment count</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="gradient-border inline-block mb-8">
+            <!-- Gift Box Container -->
+            <div id="giftBox" class="gift-float cursor-pointer transform transition-transform duration-500 hover:scale-105 bg-gradient-to-br from-purple-900 via-blue-900 to-black p-4 rounded-lg gift-shadow" onclick="openGift()">
+                <!-- Gift Box -->
+                <div class="w-64 h-64 relative mx-auto">
+                    <!-- Box Lid -->
+                    <div id="lid" class="absolute w-full h-1/3 bg-gradient-to-r from-pink-500 to-pink-400 rounded-t-lg transform-origin-top transition-transform duration-1000 gift-pattern">
+                        <!-- Bow -->
+                        <div class="bow">
+                            <div class="bow-left"></div>
+                            <div class="bow-right"></div>
+                            <div class="bow-center"></div>
+                        </div>
+                        <!-- Ribbon -->
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20">
+                            <div class="absolute w-full h-6 bg-gradient-to-r from-red-600 to-red-500 rounded-full ribbon-pattern"></div>
+                            <div class="absolute w-6 h-full bg-gradient-to-b from-red-600 to-red-500 rounded-full left-1/2 transform -translate-x-1/2 ribbon-pattern"></div>
+                        </div>
+                    </div>
+                    <!-- Box Base -->
+                    <div id="base" class="absolute bottom-0 w-full h-2/3 bg-gradient-to-r from-pink-400 to-pink-300 rounded-b-lg border-t-4 border-pink-600 gift-pattern">
+                        <!-- Vertical Ribbons -->
+                        <div class="absolute h-full w-6 bg-gradient-to-b from-red-500 to-red-400 left-1/2 transform -translate-x-1/2 ribbon-pattern"></div>
+                        <!-- Left Gold Ribbon -->
+                        <div class="absolute h-full w-6 bg-gradient-to-b from-yellow-400 to-yellow-500 left-1/4 transform -translate-x-1/2 ribbon-pattern"></div>
+                        <!-- Right Purple Ribbon -->
+                        <div class="absolute h-full w-6 bg-gradient-to-b from-purple-400 to-purple-500 left-3/4 transform -translate-x-1/2 ribbon-pattern"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create starfield
+        const starfield = document.getElementById('starfield');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            starfield.appendChild(star);
+        }
+
+        // Create snowfall effect
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.innerHTML = '❄';
+            snowflake.style.position = 'absolute';
+            snowflake.style.color = 'white';
+            snowflake.style.opacity = '0.7';
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = (Math.random() * 10 + 5) + 'px';
+            
+            const animation = snowflake.animate([
+                { transform: 'translateY(-5vh)', opacity: 0 },
+                { transform: `translateY(105vh) translateX(${Math.random() * 100 - 50}px)`, opacity: 0.7 }
+            ], {
+                duration: (Math.random() * 3000) + 5000,
+                easing: 'linear'
+            });
+            
+            animation.onfinish = () => snowflake.remove();
+            document.querySelector('.snowfall').appendChild(snowflake);
+        }
+
+        // Create snowflakes periodically
+        setInterval(createSnowflake, 100);
+
+        function openGift() {
+            // Animate lid opening with unwrap effect
+            const lid = document.getElementById('lid');
+            const base = document.getElementById('base');
+            const message = document.getElementById('newYearMessage');
+            const backdrop = document.getElementById('messageBackdrop');
+            
+            lid.style.transformOrigin = 'center bottom';
+            lid.classList.add('unwrap-animation');
+            base.classList.add('box-open-animation');
+            
+            // Show message with fade-in effect
+            setTimeout(() => {
+                backdrop.classList.add('show');
+                message.classList.add('show');
+                
+                // Trigger enhanced confetti
+                const duration = 3000;
+                const end = Date.now() + duration;
+
+                (function frame() {
+                    confetti({
+                        particleCount: 7,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: ['#FFD700', '#FF1493', '#FF69B4', '#FFB6C1']
+                    });
+                    confetti({
+                        particleCount: 7,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: ['#FFD700', '#FF1493', '#FF69B4', '#FFB6C1']
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                }());
+            }, 800);
+        }
+
+        // Add some random confetti every few seconds
+        setInterval(() => {
+            confetti({
+                particleCount: 12,
+                angle: Math.random() * 360,
+                spread: 45,
+                origin: { x: Math.random(), y: Math.random() - 0.2 },
+                colors: ['#FFD700', '#FF1493', '#FF69B4', '#FFB6C1']
+            });
+        }, 3000);
+    </script>
+</body>
+</html>
