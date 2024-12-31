@@ -204,6 +204,51 @@
             transition: all 0.5s ease-out;
         }
 
+        .message-container.show {
+            opacity: 1;
+            pointer-events: auto;
+            animation: messageReveal 0.8s ease-out forwards;
+        }
+
+        .message-content {
+            max-height: 80vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        }
+
+        .message-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .message-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .message-content::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+        }
+
+        .message-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-out;
+            z-index: 40;
+        }
+
+        .message-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         @media (max-width: 640px) {
             .message-content {
                 padding: 1rem !important;
